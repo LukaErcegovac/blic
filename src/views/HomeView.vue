@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <ul>
-      <li v-for="item in books" :key="item.url" @click="showabout(item.url)">
-        {{item.url}}
+      <li v-for="book in books" :key="book.url" @click="showabout(book.url)">
+        {{book.url}}
       </li>
     </ul>
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 
+import axios from 'axios'
 export default {
   name: 'HomeView',
 
@@ -19,15 +20,9 @@ export default {
     }
   },
 
-  async mounted(){
-    let rez = await fetch("https://www.anapioficeandfire.com/api/books")
-    let pod = await rez.json()
-
-    for(let item of pod){
-      console.log(item.url)
-    }
-
-    this.books = pod
+  mounted(){
+    axios.get('https://www.anapioficeandfire.com/api/books')
+      .then(response => {this.books = response.data; console.log(this.books)})
   }
 }
 </script>
