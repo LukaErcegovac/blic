@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <li v-for="item in books" :key="item.url" @click="showabout(item.url)">
+        {{item.url}}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+
+  data: function(){
+    return{
+      books: []
+    }
+  },
+
+  async mounted(){
+    let rez = await fetch("https://www.anapioficeandfire.com/api/books")
+    let pod = await rez.json()
+
+    for(let item of pod){
+      console.log(item.url)
+    }
+
+    this.books = pod
   }
 }
 </script>
