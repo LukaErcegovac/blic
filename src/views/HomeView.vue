@@ -20,6 +20,12 @@ export default {
     }
   },
 
+  methods:{
+    showabout(url){
+      this.$router.push({name: 'about', params: {url:url}})
+    }
+  },
+
   mounted(){
     axios.get('https://www.anapioficeandfire.com/api/books')
       .then(response => {this.books = response.data; console.log(this.books)})
