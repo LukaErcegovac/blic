@@ -12,7 +12,7 @@ export default{
 
   data: function(){
     return{
-      url:""
+      url: "",
     }
   },
 
@@ -21,8 +21,7 @@ export default{
 
     axios.get('https://www.anapioficeandfire.com/api/books' + this.$route.params.url)
       .then(response => {this.books = response.data; console.log(this.books)})
-
-  }
+  },
 }
 </script>
 
